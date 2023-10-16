@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
 
-const ProjectAdd = () => {
+const ProjectsAdd = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.65}>
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProjectAdd;
+export default ProjectsAdd;

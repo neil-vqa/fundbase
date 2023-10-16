@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import globalStyles from "./GlobalStyles";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 const Header = () => {
   return (
@@ -10,10 +11,13 @@ const Header = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
-    backgroundColor: "#1d2d44",
-    padding: 20,
+    backgroundColor: "#2A4374",
+    padding: "1.4rem",
+    margin: "1.7rem",
+    borderRadius: 20,
+    elevation: 25,
   },
 });
 

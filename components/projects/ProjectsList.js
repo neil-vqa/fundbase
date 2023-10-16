@@ -1,17 +1,14 @@
 import { useState } from "react";
-import {
-  FlatList,
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { FlatList, View } from "react-native";
+import ProjectCard from "./ProjectCard";
+import globalStyles from "../GlobalStyles";
+import EStyleSheet from "react-native-extended-stylesheet";
 
-const ProjectList = () => {
+const ProjectsList = ({ navigation }) => {
   const projectslist = [
     { id: 1, name: "vacation siargao", funds: 30000 },
     { id: 2, name: "tshirt orders", funds: 10500 },
-    { id: 3, name: "construction materials", funds: 37850 },
+    { id: 3, name: "construction materials and renovation", funds: 37850 },
     { id: 4, name: "food seminar", funds: 9500 },
     { id: 5, name: "travel switzerland", funds: 120500 },
     { id: 6, name: "travel switzerland", funds: 120500 },
@@ -26,17 +23,19 @@ const ProjectList = () => {
   const [projects, setProjects] = useState(projectslist);
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <FlatList
+        style={styles.container}
         keyExtractor={(item) => item.id}
         data={projects}
         renderItem={({ item }) => {
-          // TODO: card component
           return (
-            <TouchableOpacity style={styles.item}>
-              <Text style={styles.text}>{item.name}</Text>
-              <Text style={styles.text}>{item.funds}</Text>
-            </TouchableOpacity>
+            <ProjectCard
+              id={item.id}
+              name={item.name}
+              funds={item.funds}
+              navigation={navigation}
+            ></ProjectCard>
           );
         }}
       />
@@ -44,22 +43,10 @@ const ProjectList = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
-    flex: 1,
-  },
-  item: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 25,
-    padding: 20,
-    backgroundColor: "#f0ebd8",
-  },
-  text: {
-    color: "#000",
-    fontSize: 16,
-    fontFamily: "Montserrat_400Regular",
+    margin: "1.7rem",
   },
 });
 
-export default ProjectList;
+export default ProjectsList;

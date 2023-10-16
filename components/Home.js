@@ -3,10 +3,11 @@ import { StyleSheet, Text, View } from "react-native";
 import Header from "./Header";
 import ProjectAdd from "./ProjectAdd";
 import ProjectList from "./ProjectList";
+import globalStyles from "./GlobalStyles";
 
 const Home = () => {
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <StatusBar style="auto" />
       <Header />
       <ProjectAdd></ProjectAdd>
@@ -14,17 +15,5 @@ const Home = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  body: {
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default Home;

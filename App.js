@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import {
   useFonts,
   Montserrat_500Medium,
   Montserrat_400Regular,
 } from "@expo-google-fonts/montserrat";
+import EStyleSheet from "react-native-extended-stylesheet";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
@@ -11,10 +13,11 @@ import {
   ProjectsStackScreen,
 } from "./components/StackScreens";
 import globalStyles from "./components/GlobalStyles";
-import EStyleSheet from "react-native-extended-stylesheet";
+import { createProjectsTable } from "./services/projects";
+import dbConn from "./services/getDbConn";
 
+// initialization
 EStyleSheet.build();
-
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -22,6 +25,8 @@ export default function App() {
     Montserrat_500Medium,
     Montserrat_400Regular,
   });
+
+  useEffect(() => createProjectsTable(dbConn), []);
 
   return (
     <NavigationContainer>

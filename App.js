@@ -12,8 +12,8 @@ import {
   ProjectsStackScreen,
 } from "./components/StackScreens";
 import globalStyles from "./components/GlobalStyles";
-import { RealmProvider } from "@realm/react";
 import { schemas } from "./services/models";
+import { RealmProvider } from "@realm/react";
 
 // initialization
 EStyleSheet.build();
@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <RealmProvider schemas={schemas}>
+      <RealmProvider schema={schemas}>
         <SafeAreaProvider>
           <SafeAreaView style={globalStyles.container}>
             <Tab.Navigator screenOptions={{ headerShown: false }}>

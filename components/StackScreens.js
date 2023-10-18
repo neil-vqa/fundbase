@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./Home";
 import Projects from "./projects/Projects";
 import ProjectDetails from "./projects/ProjectDetails";
+import NewProjectForm from "./projects/NewProjectForm";
 
 const HomeStack = createNativeStackNavigator();
 const ProjectsStack = createNativeStackNavigator();
@@ -25,6 +26,10 @@ function ProjectsStackScreen() {
       <ProjectsStack.Screen
         name="ProjectDetailsScreen"
         component={ProjectDetails}
+      />
+      <ProjectsStack.Screen
+        name="NewProjectScreen"
+        component={NewProjectForm}
       />
     </ProjectsStack.Navigator>
   );

@@ -1,4 +1,6 @@
+import "react-native-get-random-values";
 import { NavigationContainer } from "@react-navigation/native";
+import { RealmProvider } from "@realm/react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import {
   useFonts,
@@ -13,7 +15,6 @@ import {
 } from "./components/StackScreens";
 import globalStyles from "./components/GlobalStyles";
 import { schemas } from "./services/models";
-import { RealmProvider } from "@realm/react";
 
 // initialization
 EStyleSheet.build();

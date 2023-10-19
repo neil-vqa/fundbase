@@ -110,15 +110,17 @@ const styles = EStyleSheet.create({
   },
   formButton: {
     marginTop: "2rem",
-    backgroundColor: "#2A4374",
+    backgroundColor: "#9DC292",
     paddingHorizontal: "1.8rem",
     paddingVertical: "0.8rem",
+    borderRadius: 10,
+    elevation: 5,
   },
   formButtonRipple: {
-    color: "#3F5682",
+    color: "#BAD4B3",
   },
   formButtonTxt: {
-    color: "#fff",
+    color: "#444",
     fontSize: "1.2rem",
     fontFamily: "Montserrat_400Regular",
   },

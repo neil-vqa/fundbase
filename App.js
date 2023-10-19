@@ -16,6 +16,7 @@ import {
 } from "./components/StackScreens";
 import globalStyles from "./components/GlobalStyles";
 import { schemas } from "./services/models";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 // initialization
 EStyleSheet.build();
@@ -35,8 +36,24 @@ export default function App() {
         <SafeAreaProvider>
           <SafeAreaView style={globalStyles.container}>
             <Tab.Navigator screenOptions={{ headerShown: false }}>
-              <Tab.Screen name="Home" component={HomeStackScreen} />
-              <Tab.Screen name="Projects" component={ProjectsStackScreen} />
+              <Tab.Screen
+                name="Home"
+                component={HomeStackScreen}
+                options={{
+                  tabBarIcon: () => <FontAwesome5 name="home" size={24} />,
+                  tabBarActiveTintColor: "#86ACDF",
+                  tabBarInactiveTintColor: "gray",
+                }}
+              />
+              <Tab.Screen
+                name="Projects"
+                component={ProjectsStackScreen}
+                options={{
+                  tabBarIcon: () => <FontAwesome5 name="list" size={24} />,
+                  tabBarActiveTintColor: "#86ACDF",
+                  tabBarInactiveTintColor: "gray",
+                }}
+              />
             </Tab.Navigator>
           </SafeAreaView>
         </SafeAreaProvider>

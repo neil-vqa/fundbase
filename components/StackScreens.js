@@ -21,15 +21,17 @@ function ProjectsStackScreen() {
       <ProjectsStack.Screen
         name="ProjectsScreen"
         component={Projects}
-        options={{ headerShown: false }}
+        options={{ title: "Projects" }}
       />
       <ProjectsStack.Screen
         name="ProjectDetailsScreen"
         component={ProjectDetails}
+        options={{ title: "Project Details" }}
       />
       <ProjectsStack.Screen
         name="NewProjectScreen"
         component={NewProjectForm}
+        options={{ title: "New Project" }}
       />
     </ProjectsStack.Navigator>
   );

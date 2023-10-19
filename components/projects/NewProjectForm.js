@@ -1,4 +1,4 @@
-import { Button, TextInput, View, Text } from "react-native";
+import { Button, TextInput, View, Text, Pressable } from "react-native";
 import { Formik } from "formik";
 import { newProjectFormSchema } from "../../services/validation";
 import { useRealm } from "@realm/react";
@@ -69,12 +69,14 @@ const NewProjectForm = () => {
                   </Text>
                 </View>
 
-                <View style={styles.formButton}>
-                  <Button
+                <View style={styles.formButtonContainer}>
+                  <Pressable
+                    android_ripple={styles.formButtonRipple}
                     onPress={handleSubmit}
-                    title="Create"
                     style={styles.formButton}
-                  />
+                  >
+                    <Text style={styles.formButtonTxt}>Create</Text>
+                  </Pressable>
                 </View>
               </View>
             )}
@@ -102,8 +104,23 @@ const styles = EStyleSheet.create({
   errorText: {
     color: "red",
   },
+  formButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
   formButton: {
-    marginTop: "3rem",
+    marginTop: "2rem",
+    backgroundColor: "#2A4374",
+    paddingHorizontal: "1.8rem",
+    paddingVertical: "0.8rem",
+  },
+  formButtonRipple: {
+    color: "#3F5682",
+  },
+  formButtonTxt: {
+    color: "#fff",
+    fontSize: "1.2rem",
+    fontFamily: "Montserrat_400Regular",
   },
 });
 

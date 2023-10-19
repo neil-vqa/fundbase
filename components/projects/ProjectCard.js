@@ -21,23 +21,23 @@ const ProjectCard = ({ navigation, id, name, funds }) => {
 
 const styles = EStyleSheet.create({
   item: {
+    marginBottom: "0.4rem",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: "1rem",
     paddingHorizontal: "1.3rem",
     paddingVertical: "0.9rem",
-    backgroundColor: "#9DC292",
-    borderRadius: 15,
+    backgroundColor: "#2A4374",
+    borderRadius: 10,
     height: "5rem",
     elevation: 5,
   },
   text: {
-    color: "#000",
-    fontSize: 16,
+    color: "#fff",
+    fontSize: "1rem",
     fontFamily: "Montserrat_400Regular",
   },
   cardRipple: {
-    color: "#BAD4B3",
+    color: "#3F5682",
   },
 });
 

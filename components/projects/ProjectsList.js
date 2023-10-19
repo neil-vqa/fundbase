@@ -36,7 +36,8 @@ const ProjectsList = ({ navigation }) => {
 
 const styles = EStyleSheet.create({
   container: {
-    margin: "1.7rem",
+    margin: "0.5rem",
+    marginTop: "1rem",
   },
 });
 

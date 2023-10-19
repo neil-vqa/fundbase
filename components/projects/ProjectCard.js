@@ -1,19 +1,20 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
+import { formatCurrency } from "../../services/helpers";
 
 const ProjectCard = ({ navigation, id, name, funds }) => {
   return (
     <View>
-      <TouchableOpacity
+      <Pressable
         style={styles.item}
-        activeOpacity={0.6}
+        android_ripple={styles.cardRipple}
         onPress={() =>
           navigation.navigate("ProjectDetailsScreen", { projectId: id })
         }
       >
         <Text style={styles.text}>{name}</Text>
-        <Text style={styles.text}>{funds}</Text>
-      </TouchableOpacity>
+        <Text style={styles.text}>{formatCurrency(funds)}</Text>
+      </Pressable>
     </View>
   );
 };
@@ -23,7 +24,8 @@ const styles = EStyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: "1rem",
-    padding: "1.3rem",
+    paddingHorizontal: "1.3rem",
+    paddingVertical: "0.9rem",
     backgroundColor: "#9DC292",
     borderRadius: 15,
     height: "5rem",
@@ -33,6 +35,9 @@ const styles = EStyleSheet.create({
     color: "#000",
     fontSize: 16,
     fontFamily: "Montserrat_400Regular",
+  },
+  cardRipple: {
+    color: "#BAD4B3",
   },
 });
 

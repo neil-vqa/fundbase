@@ -25,59 +25,61 @@ const NewProjectForm = () => {
   return (
     <View>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Formik
-          initialValues={{ name: "", description: "" }}
-          validationSchema={newProjectFormSchema}
-          onSubmit={(values, actions) => {
-            createProject(values);
-            actions.resetForm();
-          }}
-        >
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            touched,
-            errors,
-          }) => (
-            <View>
-              <View style={styles.inputContainer}>
-                <Text>Project Name</Text>
-                <TextInput
-                  onChangeText={handleChange("name")}
-                  onBlur={handleBlur("name")}
-                  value={values.name}
-                  style={styles.textInput}
-                />
-                <Text style={styles.errorText}>
-                  {touched.name && errors.name}
-                </Text>
-              </View>
+        <View>
+          <Formik
+            initialValues={{ name: "", description: "" }}
+            validationSchema={newProjectFormSchema}
+            onSubmit={(values, actions) => {
+              createProject(values);
+              actions.resetForm();
+            }}
+          >
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              touched,
+              errors,
+            }) => (
+              <View>
+                <View style={styles.inputContainer}>
+                  <Text>Project Name</Text>
+                  <TextInput
+                    onChangeText={handleChange("name")}
+                    onBlur={handleBlur("name")}
+                    value={values.name}
+                    style={styles.textInput}
+                  />
+                  <Text style={styles.errorText}>
+                    {touched.name && errors.name}
+                  </Text>
+                </View>
 
-              <View style={styles.inputContainer}>
-                <Text>Description</Text>
-                <TextInput
-                  onChangeText={handleChange("description")}
-                  onBlur={handleBlur("description")}
-                  value={values.description}
-                  style={styles.textInput}
-                />
-                <Text style={styles.errorText}>
-                  {touched.description && errors.description}
-                </Text>
-              </View>
+                <View style={styles.inputContainer}>
+                  <Text>Description</Text>
+                  <TextInput
+                    onChangeText={handleChange("description")}
+                    onBlur={handleBlur("description")}
+                    value={values.description}
+                    style={styles.textInput}
+                  />
+                  <Text style={styles.errorText}>
+                    {touched.description && errors.description}
+                  </Text>
+                </View>
 
-              <View style={styles.formButton}>
-                <Button
-                  onPress={handleSubmit}
-                  title="Create"
-                  style={styles.formButton}
-                />
+                <View style={styles.formButton}>
+                  <Button
+                    onPress={handleSubmit}
+                    title="Create"
+                    style={styles.formButton}
+                  />
+                </View>
               </View>
-            </View>
-          )}
-        </Formik>
+            )}
+          </Formik>
+        </View>
       </TouchableWithoutFeedback>
     </View>
   );

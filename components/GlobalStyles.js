@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
-export default globalStyles = StyleSheet.create({
+export default globalStyles = EStyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",

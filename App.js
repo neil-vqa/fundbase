@@ -1,4 +1,3 @@
-import "react-native-get-random-values";
 import { NavigationContainer } from "@react-navigation/native";
 import { RealmProvider } from "@realm/react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -6,6 +5,8 @@ import {
   useFonts,
   Montserrat_500Medium,
   Montserrat_400Regular,
+  Montserrat_600SemiBold,
+  Montserrat_700Bold,
 } from "@expo-google-fonts/montserrat";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -24,6 +25,8 @@ export default function App() {
   let [fontsLoaded, fontError] = useFonts({
     Montserrat_500Medium,
     Montserrat_400Regular,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
   });
 
   return (

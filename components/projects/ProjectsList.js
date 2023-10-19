@@ -7,22 +7,22 @@ import { useQuery } from "@realm/react";
 
 const ProjectsList = ({ navigation }) => {
   const [projects, setProjects] = useState([]);
-  const projectsResult = useQuery("Project");
+  const projectsResult = useQuery("Project").sorted("created", true);
 
   useEffect(() => {
     setProjects(projectsResult);
-  }, [projects]);
+  }, []);
 
   return (
     <View style={globalStyles.container}>
       <FlatList
         style={styles.container}
-        keyExtractor={(item) => item._id}
+        keyExtractor={(item) => item._id.toString()}
         data={projects}
         renderItem={({ item }) => {
           return (
             <ProjectCard
-              id={item.id}
+              id={item._id.toString()}
               name={item.name}
               funds={item.funds}
               navigation={navigation}

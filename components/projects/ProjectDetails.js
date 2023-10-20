@@ -7,6 +7,7 @@ import globalStyles from "../GlobalStyles";
 import { formatCurrency } from "../../services/helpers";
 import { Feather } from "@expo/vector-icons";
 import ProjectFundsModal from "./ProjectFundsModal";
+import ProjectTransactionCard from "./ProjectTransactionCard";
 
 const ProjectDetails = ({ route, navigation }) => {
   const { projectId } = route.params;
@@ -104,25 +105,28 @@ const ProjectDetails = ({ route, navigation }) => {
               <Text style={styles.fundBtnText}>Deduct</Text>
             </Pressable>
           </View>
-          <Text>{project.description}</Text>
-          <Text>{project.updated && project.updated.toLocaleString()}</Text>
+          <View style={styles.projectText}>
+            <Text style={styles.projectTextLabel}>Description</Text>
+            <Text style={styles.projectTextDescription}>
+              {project.description}
+            </Text>
+            <Text style={styles.projectTextLabel}>Last updated</Text>
+            <Text style={styles.projectTextDescription}>
+              {project.updated && project.updated.toLocaleString()}
+            </Text>
+          </View>
         </View>
       </View>
 
       {/* transaction history section */}
       <View style={[globalStyles.container, styles.container]}>
-        <Text>transaction history</Text>
+        <Text style={styles.projectTextLabel}>Transaction History</Text>
         <FlatList
           keyExtractor={(item) => item._id.toString()}
           data={projectResult.transactions}
           renderItem={({ item }) => {
             return (
-              <View>
-                <Text>{item.description}</Text>
-                <Text>{item.operation}</Text>
-                <Text>{item.newBalance}</Text>
-                <Text>{item.timestamp.toLocaleString()}</Text>
-              </View>
+              <ProjectTransactionCard details={item}></ProjectTransactionCard>
             );
           }}
         />
@@ -193,6 +197,17 @@ const styles = EStyleSheet.create({
   },
   deductBtn: {
     marginLeft: "0.3rem",
+  },
+  projectText: {
+    paddingVertical: "1rem",
+  },
+  projectTextDescription: {
+    fontFamily: "Montserrat_500Medium",
+    marginBottom: 10,
+  },
+  projectTextLabel: {
+    color: "#555",
+    fontFamily: "Montserrat_500Medium",
   },
 });
 

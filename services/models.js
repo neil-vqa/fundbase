@@ -13,11 +13,34 @@ class Project extends Realm.Object {
       },
       created: "date",
       updated: "date",
+      transactions: {
+        type: "list",
+        objectType: "Transaction",
+        optional: false,
+      },
     },
     primaryKey: "_id",
   };
 }
 
-const schemas = [Project];
+class Transaction extends Realm.Object {
+  static schema = {
+    name: "Transaction",
+    properties: {
+      _id: "objectId",
+      description: "string",
+      operation: "string",
+      amount: {
+        type: "float",
+        default: 0,
+      },
+      newBalance: "float",
+      timestamp: "date",
+    },
+    primaryKey: "_id",
+  };
+}
+
+const schemas = [Project, Transaction];
 
 export { schemas };

@@ -1,10 +1,12 @@
-import { Button, TextInput, View, Text, Pressable } from "react-native";
+import { TextInput, View, Text, Pressable } from "react-native";
 import { Formik } from "formik";
 import { newProjectFormSchema } from "../../services/validation";
 import { useRealm } from "@realm/react";
 import Realm from "realm";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import globalStyles from "../GlobalStyles";
 
 const NewProjectForm = () => {
   const realm = useRealm();
@@ -23,7 +25,7 @@ const NewProjectForm = () => {
   };
 
   return (
-    <View>
+    <View style={globalStyles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
           <Formik
@@ -75,6 +77,7 @@ const NewProjectForm = () => {
                     onPress={handleSubmit}
                     style={styles.formButton}
                   >
+                    <Feather name="check" size={24} color="#555" />
                     <Text style={styles.formButtonTxt}>Create</Text>
                   </Pressable>
                 </View>
@@ -109,6 +112,9 @@ const styles = EStyleSheet.create({
     justifyContent: "center",
   },
   formButton: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: "2rem",
     backgroundColor: "#9DC292",
     paddingHorizontal: "1.8rem",
@@ -120,9 +126,10 @@ const styles = EStyleSheet.create({
     color: "#BAD4B3",
   },
   formButtonTxt: {
-    color: "#444",
-    fontSize: "1.2rem",
-    fontFamily: "Montserrat_400Regular",
+    fontSize: "1rem",
+    color: "#555",
+    fontFamily: "Montserrat_600SemiBold",
+    marginLeft: 6,
   },
 });
 

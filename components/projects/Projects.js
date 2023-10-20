@@ -2,7 +2,7 @@ import { View, Text, Pressable } from "react-native";
 import ProjectsList from "./ProjectsList";
 import globalStyles from "../GlobalStyles";
 import EStyleSheet from "react-native-extended-stylesheet";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 const Projects = ({ navigation }) => {
   return (
@@ -13,7 +13,7 @@ const Projects = ({ navigation }) => {
           android_ripple={styles.newBtnRipple}
           onPress={() => navigation.navigate("NewProjectScreen")}
         >
-          <FontAwesome5 name="plus" size={18} color="#777" />
+          <Feather name="plus" size={20} color="#555" />
           <Text style={styles.newBtnTxt}>New Project</Text>
         </Pressable>
       </View>
@@ -27,17 +27,17 @@ const styles = EStyleSheet.create({
   },
   newBtn: {
     padding: "1rem",
-    backgroundColor: "#DBE6F5",
+    backgroundColor: "#BAD4B3",
     borderRadius: 10,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
   newBtnRipple: {
-    color: "#C3D6EF",
+    color: "#CEE1C9",
   },
   newBtnTxt: {
-    color: "#777",
+    color: "#555",
     marginHorizontal: "0.5rem",
   },
 });

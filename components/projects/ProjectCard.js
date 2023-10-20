@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { formatCurrency } from "../../services/helpers";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 const ProjectCard = ({ navigation, id, name, funds }) => {
   return (
@@ -11,14 +11,13 @@ const ProjectCard = ({ navigation, id, name, funds }) => {
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.text}>{formatCurrency(funds)}</Text>
         </View>
-        <FontAwesome5
-          name="chevron-right"
-          size={32}
-          color="#888"
+        <Pressable
           onPress={() =>
             navigation.navigate("ProjectDetailsScreen", { projectId: id })
           }
-        />
+        >
+          <Feather name="chevron-right" size={45} color="#999" />
+        </Pressable>
       </Pressable>
     </View>
   );
@@ -26,29 +25,27 @@ const ProjectCard = ({ navigation, id, name, funds }) => {
 
 const styles = EStyleSheet.create({
   item: {
-    marginBottom: "0.4rem",
+    marginBottom: "0.5rem",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: "1.3rem",
     paddingVertical: "0.9rem",
-    backgroundColor: "#B1CEA8",
+    backgroundColor: "#fff",
     borderRadius: 10,
+    borderColor: "#999",
+    borderWidth: 0.6,
     height: "5rem",
     elevation: 5,
   },
   title: {
-    color: "#222",
     fontSize: "1rem",
     fontFamily: "Montserrat_600SemiBold",
   },
   text: {
-    color: "#444",
+    color: "#999",
     fontSize: "1rem",
-    fontFamily: "Montserrat_400Regular",
-  },
-  cardRipple: {
-    color: "#CEE1C9",
+    fontFamily: "Montserrat_600SemiBold",
   },
 });
 

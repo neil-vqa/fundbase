@@ -16,11 +16,23 @@ import {
 } from "./components/StackScreens";
 import globalStyles from "./components/GlobalStyles";
 import { schemas } from "./services/models";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 // initialization
 EStyleSheet.build();
 const Tab = createBottomTabNavigator();
+
+function tabIconSetter(route, color, size) {
+  let iconName;
+
+  if (route.name === "Home") {
+    iconName = "home";
+  } else if (route.name === "Projects") {
+    iconName = "list";
+  }
+
+  return <Feather name={iconName} size={size} color={color} />;
+}
 
 export default function App() {
   let [fontsLoaded, fontError] = useFonts({
@@ -32,28 +44,20 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <RealmProvider schema={schemas}>
+      <RealmProvider schema={schemas} schemaVersion={1}>
         <SafeAreaProvider>
           <SafeAreaView style={globalStyles.container}>
-            <Tab.Navigator screenOptions={{ headerShown: false }}>
-              <Tab.Screen
-                name="Home"
-                component={HomeStackScreen}
-                options={{
-                  tabBarIcon: () => <FontAwesome5 name="home" size={24} />,
-                  tabBarActiveTintColor: "#86ACDF",
-                  tabBarInactiveTintColor: "gray",
-                }}
-              />
-              <Tab.Screen
-                name="Projects"
-                component={ProjectsStackScreen}
-                options={{
-                  tabBarIcon: () => <FontAwesome5 name="list" size={24} />,
-                  tabBarActiveTintColor: "#86ACDF",
-                  tabBarInactiveTintColor: "gray",
-                }}
-              />
+            <Tab.Navigator
+              screenOptions={({ route }) => ({
+                tabBarIcon: ({ color, size }) =>
+                  tabIconSetter(route, color, size),
+                headerShown: false,
+                tabBarActiveTintColor: "#9DC292",
+                tabBarInactiveTintColor: "#868D84",
+              })}
+            >
+              <Tab.Screen name="Home" component={HomeStackScreen} />
+              <Tab.Screen name="Projects" component={ProjectsStackScreen} />
             </Tab.Navigator>
           </SafeAreaView>
         </SafeAreaProvider>

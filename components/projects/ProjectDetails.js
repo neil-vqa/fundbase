@@ -1,20 +1,69 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, FlatList } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { useState, useEffect } from "react";
-import { useObject } from "@realm/react";
+import { useObject, useRealm } from "@realm/react";
 import Realm from "realm";
 import globalStyles from "../GlobalStyles";
 import { formatCurrency } from "../../services/helpers";
 import { Feather } from "@expo/vector-icons";
+import ProjectFundsModal from "./ProjectFundsModal";
 
 const ProjectDetails = ({ route, navigation }) => {
   const { projectId } = route.params;
 
+  const realm = useRealm();
+  const [isFundModalOpen, setIsFundModalOpen] = useState(false);
+  const [currentOperation, setCurrentOperation] = useState(null);
   const [project, setProject] = useState({});
+
   const projectResult = useObject(
     "Project",
     new Realm.BSON.ObjectId(projectId)
   );
+
+  const createTransaction = (
+    realm,
+    description,
+    operation,
+    amount,
+    currentFunds
+  ) => {
+    return realm.create("Transaction", {
+      _id: new Realm.BSON.ObjectId(),
+      description: description,
+      operation: operation,
+      amount: amount,
+      newBalance: currentFunds,
+      timestamp: new Date(),
+    });
+  };
+
+  const updateFunds = (description, operation, amount) => {
+    realm.write(() => {
+      if (operation === "add") {
+        projectResult.funds += amount;
+      } else if (operation === "deduct") {
+        projectResult.funds -= amount;
+      }
+
+      const newTransaction = createTransaction(
+        realm,
+        description,
+        operation,
+        amount,
+        projectResult.funds
+      );
+
+      projectResult.transactions.unshift(newTransaction);
+      projectResult.updated = newTransaction.timestamp;
+    });
+    setIsFundModalOpen(false);
+  };
+
+  const fundBtnHandler = (operation) => {
+    setCurrentOperation(operation);
+    setIsFundModalOpen(true);
+  };
 
   useEffect(() => {
     setProject(projectResult);
@@ -22,6 +71,13 @@ const ProjectDetails = ({ route, navigation }) => {
 
   return (
     <View style={globalStyles.container}>
+      <ProjectFundsModal
+        isOpen={isFundModalOpen}
+        setIsOpen={setIsFundModalOpen}
+        operation={currentOperation}
+        updateFunction={updateFunds}
+      />
+
       <View style={[globalStyles.container, styles.container]}>
         <Text style={styles.title}>{project.name}</Text>
         <View style={styles.bodyContainer}>
@@ -33,6 +89,7 @@ const ProjectDetails = ({ route, navigation }) => {
             <Pressable
               android_ripple={styles.fundBtnRipple}
               style={[styles.fundBtn, styles.addBtn]}
+              onPress={() => fundBtnHandler("add")}
             >
               <Feather name="plus-circle" size={20} color="#555" />
               <Text style={styles.fundBtnText}>Add</Text>
@@ -40,6 +97,8 @@ const ProjectDetails = ({ route, navigation }) => {
             <Pressable
               style={[styles.fundBtn, styles.deductBtn]}
               android_ripple={styles.fundBtnRipple}
+              onPress={() => fundBtnHandler("deduct")}
+              disabled={project.funds <= 0}
             >
               <Feather name="minus-circle" size={20} color="#555" />
               <Text style={styles.fundBtnText}>Deduct</Text>
@@ -49,8 +108,24 @@ const ProjectDetails = ({ route, navigation }) => {
           <Text>{project.updated && project.updated.toLocaleString()}</Text>
         </View>
       </View>
+
+      {/* transaction history section */}
       <View style={[globalStyles.container, styles.container]}>
         <Text>transaction history</Text>
+        <FlatList
+          keyExtractor={(item) => item._id.toString()}
+          data={projectResult.transactions}
+          renderItem={({ item }) => {
+            return (
+              <View>
+                <Text>{item.description}</Text>
+                <Text>{item.operation}</Text>
+                <Text>{item.newBalance}</Text>
+                <Text>{item.timestamp.toLocaleString()}</Text>
+              </View>
+            );
+          }}
+        />
       </View>
     </View>
   );

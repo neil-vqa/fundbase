@@ -8,12 +8,16 @@ import { formatCurrency } from "../../services/helpers";
 import { Feather } from "@expo/vector-icons";
 import ProjectFundsModal from "./ProjectFundsModal";
 import ProjectTransactionCard from "./ProjectTransactionCard";
+import ProjectEditModal from "./ProjectEditModal";
 
 const ProjectDetails = ({ route, navigation }) => {
   const { projectId } = route.params;
 
   const realm = useRealm();
+
   const [isFundModalOpen, setIsFundModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const [currentOperation, setCurrentOperation] = useState(null);
   const [project, setProject] = useState({});
 
@@ -61,6 +65,14 @@ const ProjectDetails = ({ route, navigation }) => {
     setIsFundModalOpen(false);
   };
 
+  const updateDetails = (newName, newDescription) => {
+    realm.write(() => {
+      projectResult.name = newName;
+      projectResult.description = newDescription;
+    });
+    setIsEditModalOpen(false);
+  };
+
   const fundBtnHandler = (operation) => {
     setCurrentOperation(operation);
     setIsFundModalOpen(true);
@@ -80,8 +92,27 @@ const ProjectDetails = ({ route, navigation }) => {
         currentBalance={projectResult.funds}
       />
 
+      <ProjectEditModal
+        isOpen={isEditModalOpen}
+        setIsOpen={setIsEditModalOpen}
+        currentDetails={{
+          name: projectResult.name,
+          description: projectResult.description,
+        }}
+        updateFunction={updateDetails}
+      />
+
+      {/* Project main details */}
       <View style={[globalStyles.container, styles.container]}>
-        <Text style={styles.title}>{project.name}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{project.name}</Text>
+          <Pressable
+            style={styles.editBtn}
+            onPress={() => setIsEditModalOpen(true)}
+          >
+            <Feather name="edit-3" size={22} color="#999" />
+          </Pressable>
+        </View>
         <View style={styles.bodyContainer}>
           <View style={styles.fundTxtContainer}>
             <Text style={styles.fundTxt}>{formatCurrency(project.funds)}</Text>
@@ -140,6 +171,11 @@ const styles = EStyleSheet.create({
   container: {
     padding: "1rem",
     margin: 6,
+  },
+  titleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   title: {
     fontSize: "1.5rem",
@@ -209,6 +245,11 @@ const styles = EStyleSheet.create({
   projectTextLabel: {
     color: "#555",
     fontFamily: "Montserrat_500Medium",
+  },
+  editBtn: {
+    backgroundColor: "#E2EDDE",
+    padding: 5,
+    borderRadius: 5,
   },
 });
 

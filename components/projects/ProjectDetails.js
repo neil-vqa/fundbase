@@ -77,6 +77,7 @@ const ProjectDetails = ({ route, navigation }) => {
         setIsOpen={setIsFundModalOpen}
         operation={currentOperation}
         updateFunction={updateFunds}
+        currentBalance={projectResult.funds}
       />
 
       <View style={[globalStyles.container, styles.container]}>

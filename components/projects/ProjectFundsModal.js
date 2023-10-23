@@ -6,18 +6,21 @@ import {
   Modal,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { Formik } from "formik";
 import globalStyles from "../GlobalStyles";
 import { updateFundsFormSchema } from "../../services/validation";
+import { formatCurrency } from "../../services/helpers";
 
 const ProjectFundsModal = ({
   isOpen,
   setIsOpen,
   operation,
   updateFunction,
+  currentBalance,
 }) => {
   return (
     <View>
@@ -36,12 +39,25 @@ const ProjectFundsModal = ({
                   initialValues={{ description: "", amount: "" }}
                   validationSchema={updateFundsFormSchema}
                   onSubmit={(values, actions) => {
-                    updateFunction(
-                      values.description,
-                      operation,
-                      Number(values.amount)
-                    );
-                    actions.resetForm();
+                    if (
+                      operation === "deduct" &&
+                      currentBalance - values.amount < 0
+                    ) {
+                      Alert.alert(
+                        "Check your amount",
+                        `The amount to be deducted must not exceed the current fund balance of ${formatCurrency(
+                          currentBalance
+                        )}`,
+                        [{ text: "Okay" }]
+                      );
+                    } else {
+                      updateFunction(
+                        values.description,
+                        operation,
+                        Number(values.amount)
+                      );
+                      actions.resetForm();
+                    }
                   }}
                 >
                   {({

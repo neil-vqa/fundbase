@@ -23,6 +23,19 @@ export default globalStyles = EStyleSheet.create({
     paddingHorizontal: "1.2rem",
     paddingVertical: "0.8rem",
   },
+  greenBtn: {
+    backgroundColor: "#9DC292",
+    elevation: 5,
+  },
+  greenBtnRipple: {
+    color: "#BAD4B3",
+  },
+  greenBtnText: {
+    fontSize: "1rem",
+    color: "#555",
+    fontFamily: "Montserrat_600SemiBold",
+    marginLeft: 6,
+  },
   genericTextInput: {
     paddingHorizontal: "1.2rem",
     paddingVertical: "0.8rem",

@@ -25,8 +25,10 @@ const ProjectEditModal = ({
         <View style={globalStyles.container}>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={globalStyles.container}>
-              <View style={styles.modalHeader}>
-                <Text style={styles.modalHeaderTitle}>Edit project</Text>
+              <View style={globalStyles.genericModalHeader}>
+                <Text style={globalStyles.genericModalHeaderTitle}>
+                  Edit project
+                </Text>
                 <Pressable onPress={() => setIsOpen(false)}>
                   <Feather name="chevrons-down" size={50} color="#555" />
                 </Pressable>
@@ -57,9 +59,9 @@ const ProjectEditModal = ({
                           onChangeText={handleChange("name")}
                           onBlur={handleBlur("name")}
                           value={values.name}
-                          style={styles.textInput}
+                          style={globalStyles.genericTextInput}
                         />
-                        <Text style={styles.errorText}>
+                        <Text style={globalStyles.genericErrorText}>
                           {touched.name && errors.name}
                         </Text>
                       </View>
@@ -70,22 +72,25 @@ const ProjectEditModal = ({
                           onChangeText={handleChange("description")}
                           onBlur={handleBlur("description")}
                           value={values.description}
-                          style={styles.textInput}
+                          style={globalStyles.genericTextInput}
                           multiline={true}
                         />
-                        <Text style={styles.errorText}>
+                        <Text style={globalStyles.genericErrorText}>
                           {touched.description && errors.description}
                         </Text>
                       </View>
 
-                      <View style={styles.fundBtnContainer}>
+                      <View style={styles.updateBtnContainer}>
                         <Pressable
-                          style={styles.fundBtn}
-                          android_ripple={styles.fundBtnRipple}
+                          style={[
+                            globalStyles.genericBtn,
+                            globalStyles.greenBtn,
+                          ]}
+                          android_ripple={globalStyles.greenBtnRipple}
                           onPress={handleSubmit}
                         >
                           <Feather name="check" size={24} color="#555" />
-                          <Text style={styles.fundBtnText}>Update</Text>
+                          <Text style={globalStyles.greenBtnText}>Update</Text>
                         </Pressable>
                       </View>
                     </View>
@@ -105,54 +110,10 @@ const styles = EStyleSheet.create({
     marginTop: "1rem",
     marginHorizontal: "2rem",
   },
-  textInput: {
-    paddingHorizontal: "1.2rem",
-    paddingVertical: "0.8rem",
-    borderWidth: 1,
-    borderColor: "#888",
-    borderRadius: 10,
-    marginVertical: 8,
-    fontSize: "1.1rem",
-  },
-  errorText: {
-    color: "red",
-  },
-  modalHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: "1rem",
-    paddingTop: "1rem",
-    borderBottomWidth: 1,
-    borderColor: "#999",
-  },
-  modalHeaderTitle: {
-    fontSize: "1.3rem",
-    color: "#555",
-  },
-  fundBtnContainer: {
+  updateBtnContainer: {
     marginTop: "1rem",
     flexDirection: "row",
     justifyContent: "center",
-  },
-  fundBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#9DC292",
-    borderRadius: 10,
-    paddingHorizontal: "1.2rem",
-    paddingVertical: "0.8rem",
-    elevation: 5,
-  },
-  fundBtnText: {
-    fontSize: "1rem",
-    color: "#555",
-    fontFamily: "Montserrat_600SemiBold",
-    marginLeft: 6,
-  },
-  fundBtnRipple: {
-    color: "#BAD4B3",
   },
 });
 

@@ -52,9 +52,9 @@ const NewProjectForm = ({ navigation }) => {
                     onChangeText={handleChange("name")}
                     onBlur={handleBlur("name")}
                     value={values.name}
-                    style={styles.textInput}
+                    style={globalStyles.genericTextInput}
                   />
-                  <Text style={styles.errorText}>
+                  <Text style={globalStyles.genericErrorText}>
                     {touched.name && errors.name}
                   </Text>
                 </View>
@@ -65,21 +65,21 @@ const NewProjectForm = ({ navigation }) => {
                     onChangeText={handleChange("description")}
                     onBlur={handleBlur("description")}
                     value={values.description}
-                    style={styles.textInput}
+                    style={globalStyles.genericTextInput}
                   />
-                  <Text style={styles.errorText}>
+                  <Text style={globalStyles.genericErrorText}>
                     {touched.description && errors.description}
                   </Text>
                 </View>
 
                 <View style={styles.formButtonContainer}>
                   <Pressable
-                    android_ripple={styles.formButtonRipple}
+                    android_ripple={globalStyles.greenBtnRipple}
                     onPress={handleSubmit}
-                    style={styles.formButton}
+                    style={[globalStyles.genericBtn, globalStyles.greenBtn]}
                   >
                     <Feather name="check" size={24} color="#555" />
-                    <Text style={styles.formButtonTxt}>Create</Text>
+                    <Text style={globalStyles.greenBtnText}>Create</Text>
                   </Pressable>
                 </View>
               </View>
@@ -96,41 +96,9 @@ const styles = EStyleSheet.create({
     marginTop: "1rem",
     marginHorizontal: "2rem",
   },
-  textInput: {
-    paddingHorizontal: "1.2rem",
-    paddingVertical: "0.8rem",
-    borderWidth: 1,
-    borderColor: "#888",
-    borderRadius: 10,
-    marginVertical: 8,
-    fontSize: "1.1rem",
-  },
-  errorText: {
-    color: "red",
-  },
   formButtonContainer: {
     flexDirection: "row",
     justifyContent: "center",
-  },
-  formButton: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "2rem",
-    backgroundColor: "#9DC292",
-    paddingHorizontal: "1.8rem",
-    paddingVertical: "0.8rem",
-    borderRadius: 10,
-    elevation: 5,
-  },
-  formButtonRipple: {
-    color: "#BAD4B3",
-  },
-  formButtonTxt: {
-    fontSize: "1rem",
-    color: "#555",
-    fontFamily: "Montserrat_600SemiBold",
-    marginLeft: 6,
   },
 });
 

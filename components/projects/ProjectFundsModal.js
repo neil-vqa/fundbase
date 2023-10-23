@@ -28,8 +28,10 @@ const ProjectFundsModal = ({
         <View style={globalStyles.container}>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={globalStyles.container}>
-              <View style={styles.modalHeader}>
-                <Text style={styles.modalHeaderTitle}>{operation} funds</Text>
+              <View style={globalStyles.genericModalHeader}>
+                <Text style={globalStyles.genericModalHeaderTitle}>
+                  {operation} funds
+                </Text>
                 <Pressable onPress={() => setIsOpen(false)}>
                   <Feather name="chevrons-down" size={50} color="#555" />
                 </Pressable>
@@ -75,9 +77,9 @@ const ProjectFundsModal = ({
                           onChangeText={handleChange("description")}
                           onBlur={handleBlur("description")}
                           value={values.description}
-                          style={styles.textInput}
+                          style={globalStyles.genericTextInput}
                         />
-                        <Text style={styles.errorText}>
+                        <Text style={globalStyles.genericErrorText}>
                           {touched.description && errors.description}
                         </Text>
                       </View>
@@ -88,16 +90,19 @@ const ProjectFundsModal = ({
                           onBlur={handleBlur("amount")}
                           value={values.amount}
                           inputMode="numeric"
-                          style={styles.textInput}
+                          style={globalStyles.genericTextInput}
                         />
-                        <Text style={styles.errorText}>
+                        <Text style={globalStyles.genericErrorText}>
                           {touched.amount && errors.amount}
                         </Text>
                       </View>
                       <View style={styles.fundBtnContainer}>
                         <Pressable
-                          style={[styles.fundBtn]}
-                          android_ripple={styles.fundBtnRipple}
+                          style={[
+                            globalStyles.genericBtn,
+                            globalStyles.greenBtn,
+                          ]}
+                          android_ripple={globalStyles.greenBtnRipple}
                           onPress={handleSubmit}
                         >
                           <Feather
@@ -109,7 +114,7 @@ const ProjectFundsModal = ({
                             size={20}
                             color="#555"
                           />
-                          <Text style={styles.fundBtnText}>
+                          <Text style={globalStyles.greenBtnText}>
                             {operation ? operation.toUpperCase() : "Add/Deduct"}
                           </Text>
                         </Pressable>
@@ -131,54 +136,10 @@ const styles = EStyleSheet.create({
     marginTop: "1rem",
     marginHorizontal: "2rem",
   },
-  textInput: {
-    paddingHorizontal: "1.2rem",
-    paddingVertical: "0.8rem",
-    borderWidth: 1,
-    borderColor: "#888",
-    borderRadius: 10,
-    marginVertical: 8,
-    fontSize: "1.1rem",
-  },
-  errorText: {
-    color: "red",
-  },
-  modalHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: "1rem",
-    paddingTop: "1rem",
-    borderBottomWidth: 1,
-    borderColor: "#999",
-  },
-  modalHeaderTitle: {
-    fontSize: "1.3rem",
-    color: "#555",
-  },
   fundBtnContainer: {
     marginTop: "1rem",
     flexDirection: "row",
     justifyContent: "center",
-  },
-  fundBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#9DC292",
-    borderRadius: 10,
-    paddingHorizontal: "1.2rem",
-    paddingVertical: "0.8rem",
-    elevation: 5,
-  },
-  fundBtnText: {
-    fontSize: "1rem",
-    color: "#555",
-    fontFamily: "Montserrat_600SemiBold",
-    marginLeft: 6,
-  },
-  fundBtnRipple: {
-    color: "#BAD4B3",
   },
 });
 

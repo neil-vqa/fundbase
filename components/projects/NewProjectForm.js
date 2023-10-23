@@ -8,7 +8,7 @@ import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import globalStyles from "../GlobalStyles";
 
-const NewProjectForm = () => {
+const NewProjectForm = ({ navigation }) => {
   const realm = useRealm();
 
   const createProject = (details) => {
@@ -34,6 +34,7 @@ const NewProjectForm = () => {
             onSubmit={(values, actions) => {
               createProject(values);
               actions.resetForm();
+              navigation.navigate("ProjectsScreen");
             }}
           >
             {({

@@ -11,8 +11,41 @@ export default globalStyles = EStyleSheet.create({
     fontFamily: "Montserrat_500Medium",
   },
   text: {
-    fontSize: 12,
-    color: "#fff",
+    fontSize: "1rem",
+    color: "#555",
     fontFamily: "Montserrat_400Regular",
+  },
+  genericBtn: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    paddingHorizontal: "1.2rem",
+    paddingVertical: "0.8rem",
+  },
+  genericTextInput: {
+    paddingHorizontal: "1.2rem",
+    paddingVertical: "0.8rem",
+    borderWidth: 1,
+    borderColor: "#888",
+    borderRadius: 10,
+    marginVertical: 8,
+    fontSize: "1.1rem",
+  },
+  genericErrorText: {
+    color: "red",
+  },
+  genericModalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: "1rem",
+    paddingTop: "1rem",
+    borderBottomWidth: 1,
+    borderColor: "#999",
+  },
+  genericModalHeaderTitle: {
+    fontSize: "1.3rem",
+    color: "#555",
   },
 });

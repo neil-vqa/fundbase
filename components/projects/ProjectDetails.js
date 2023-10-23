@@ -9,6 +9,7 @@ import { Feather } from "@expo/vector-icons";
 import ProjectFundsModal from "./ProjectFundsModal";
 import ProjectTransactionCard from "./ProjectTransactionCard";
 import ProjectEditModal from "./ProjectEditModal";
+import ProjectMoreModal from "./ProjectMoreModal";
 
 const ProjectDetails = ({ route, navigation }) => {
   const { projectId } = route.params;
@@ -17,6 +18,7 @@ const ProjectDetails = ({ route, navigation }) => {
 
   const [isFundModalOpen, setIsFundModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isMoreModalOpen, setIsMoreModalOpen] = useState(false);
 
   const [currentOperation, setCurrentOperation] = useState(null);
   const [project, setProject] = useState({});
@@ -102,6 +104,13 @@ const ProjectDetails = ({ route, navigation }) => {
         updateFunction={updateDetails}
       />
 
+      <ProjectMoreModal
+        isOpen={isMoreModalOpen}
+        setIsOpen={setIsMoreModalOpen}
+        project={projectResult}
+        navigation={navigation}
+      />
+
       {/* Project main details */}
       <View style={[globalStyles.container, styles.container]}>
         <View style={styles.titleContainer}>
@@ -146,6 +155,9 @@ const ProjectDetails = ({ route, navigation }) => {
             <Text style={styles.projectTextDescription}>
               {project.updated && project.updated.toLocaleString()}
             </Text>
+            <Pressable onPress={() => setIsMoreModalOpen(true)}>
+              <Text style={styles.projectTextLabel}>More actions...</Text>
+            </Pressable>
           </View>
         </View>
       </View>

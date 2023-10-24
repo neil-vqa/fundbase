@@ -6,19 +6,14 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import { useQuery } from "@realm/react";
 
 const ProjectsList = ({ navigation }) => {
-  const [projects, setProjects] = useState([]);
   const projectsResult = useQuery("Project").sorted("created", true);
-
-  useEffect(() => {
-    setProjects(projectsResult);
-  }, []);
 
   return (
     <View style={globalStyles.container}>
       <FlatList
         style={styles.container}
         keyExtractor={(item) => item._id.toString()}
-        data={projects}
+        data={projectsResult}
         renderItem={({ item }) => {
           return (
             <ProjectCard

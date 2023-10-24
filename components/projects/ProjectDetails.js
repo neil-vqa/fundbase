@@ -1,32 +1,30 @@
 import { View, Text, Pressable, FlatList } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useObject, useRealm } from "@realm/react";
 import Realm from "realm";
 import globalStyles from "../GlobalStyles";
 import { formatCurrency } from "../../services/helpers";
 import { Feather } from "@expo/vector-icons";
-import ProjectFundsModal from "./ProjectFundsModal";
 import ProjectTransactionCard from "./ProjectTransactionCard";
+import ProjectFundsModal from "./ProjectFundsModal";
 import ProjectEditModal from "./ProjectEditModal";
 import ProjectMoreModal from "./ProjectMoreModal";
 
 const ProjectDetails = ({ route, navigation }) => {
   const { projectId } = route.params;
 
+  const projectResult = useObject(
+    "Project",
+    new Realm.BSON.ObjectId(projectId)
+  );
+
   const realm = useRealm();
 
   const [isFundModalOpen, setIsFundModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isMoreModalOpen, setIsMoreModalOpen] = useState(false);
-
   const [currentOperation, setCurrentOperation] = useState(null);
-  const [project, setProject] = useState({});
-
-  const projectResult = useObject(
-    "Project",
-    new Realm.BSON.ObjectId(projectId)
-  );
 
   const createTransaction = (
     realm,
@@ -80,10 +78,6 @@ const ProjectDetails = ({ route, navigation }) => {
     setIsFundModalOpen(true);
   };
 
-  useEffect(() => {
-    setProject(projectResult);
-  }, []);
-
   return (
     <View style={globalStyles.container}>
       <ProjectFundsModal
@@ -114,7 +108,7 @@ const ProjectDetails = ({ route, navigation }) => {
       {/* Project main details */}
       <View style={[globalStyles.container, styles.container]}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{project.name}</Text>
+          <Text style={styles.title}>{projectResult.name}</Text>
           <Pressable
             style={styles.editBtn}
             onPress={() => setIsEditModalOpen(true)}
@@ -124,7 +118,9 @@ const ProjectDetails = ({ route, navigation }) => {
         </View>
         <View style={styles.bodyContainer}>
           <View style={styles.fundTxtContainer}>
-            <Text style={styles.fundTxt}>{formatCurrency(project.funds)}</Text>
+            <Text style={styles.fundTxt}>
+              {formatCurrency(projectResult.funds)}
+            </Text>
             <Text style={styles.fundTxtLabel}>total funds</Text>
           </View>
           <View style={styles.fundBtnContainer}>
@@ -140,7 +136,7 @@ const ProjectDetails = ({ route, navigation }) => {
               style={[styles.fundBtn, styles.deductBtn]}
               android_ripple={styles.fundBtnRipple}
               onPress={() => fundBtnHandler("deduct")}
-              disabled={project.funds <= 0}
+              disabled={projectResult.funds <= 0}
             >
               <Feather name="minus-circle" size={20} color="#555" />
               <Text style={styles.fundBtnText}>Deduct</Text>
@@ -149,11 +145,11 @@ const ProjectDetails = ({ route, navigation }) => {
           <View style={styles.projectText}>
             <Text style={styles.projectTextLabel}>Description</Text>
             <Text style={styles.projectTextDescription}>
-              {project.description}
+              {projectResult.description}
             </Text>
             <Text style={styles.projectTextLabel}>Last updated</Text>
             <Text style={styles.projectTextDescription}>
-              {project.updated && project.updated.toLocaleString()}
+              {projectResult.updated && projectResult.updated.toLocaleString()}
             </Text>
             <Pressable onPress={() => setIsMoreModalOpen(true)}>
               <Text style={styles.projectTextLabel}>More actions...</Text>

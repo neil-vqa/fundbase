@@ -6,8 +6,8 @@ export default globalStyles = EStyleSheet.create({
     backgroundColor: "#fff",
   },
   title: {
-    fontSize: 30,
-    color: "#fff",
+    fontSize: "2rem",
+    color: "#555",
     fontFamily: "Montserrat_500Medium",
   },
   text: {

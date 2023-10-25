@@ -8,66 +8,57 @@ const Home = () => {
   const currentHour = today.getHours();
 
   const timeImages = {
-    morning: require("../../assets/images/morning.png"),
-    afternoon: require("../../assets/images/afternoon.png"),
-    evening: require("../../assets/images/evening.png"),
+    morning: {
+      image: require("../../assets/images/morning.png"),
+      text: "Morning comes whether you set the alarm or not.",
+    },
+    afternoon: {
+      image: require("../../assets/images/afternoon.png"),
+      text: "What about lunch?",
+    },
+    evening: {
+      image: require("../../assets/images/evening.png"),
+      text: "It is better to begin in the evening than not at all.",
+    },
   };
 
   let imgSource;
-  let greeting;
+  let greetingText;
 
   if (currentHour < 12) {
-    imgSource = timeImages.morning;
-    greeting = "Good morning!";
+    imgSource = timeImages.morning.image;
+    greetingText = timeImages.morning.text;
   } else if (currentHour < 18) {
-    imgSource = timeImages.afternoon;
-    greeting = "Good afternoon!";
+    imgSource = timeImages.afternoon.image;
+    greetingText = timeImages.afternoon.text;
   } else {
-    imgSource = timeImages.evening;
-    greeting = "Good evening!";
+    imgSource = timeImages.evening.image;
+    greetingText = timeImages.evening.text;
   }
 
   return (
     <View style={[globalStyles.container, styles.container]}>
       <StatusBar style="auto" />
-      <View style={styles.imageContainer}>
-        <Image source={imgSource} style={styles.greeting} />
-      </View>
-      <View style={styles.greetingContainer}>
-        <Text style={globalStyles.title}>{greeting}</Text>
-        <View style={styles.tagline}>
-          <Text style={[globalStyles.text, styles.text]}>Fundbase</Text>
-          <Text style={[globalStyles.text, styles.text]}>
-            Manage your team's project funds.
-          </Text>
-        </View>
-      </View>
+      <Image source={imgSource} style={styles.greeting} />
+      <Text style={styles.text}>{greetingText}</Text>
     </View>
   );
 };
 
 const styles = EStyleSheet.create({
   container: {
-    justifyContent: "center",
-    padding: "1rem",
-  },
-  imageContainer: {
-    flex: 1,
-  },
-  greetingContainer: {
-    flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
   greeting: {
-    height: "100%",
-    width: "100%",
+    width: 500,
+    height: 450,
     resizeMode: "contain",
   },
-  tagline: {
-    marginTop: "2rem",
-  },
   text: {
-    fontSize: "0.8rem",
+    fontStyle: "italic",
+    fontFamily: "Montserrat_400Regular",
+    color: "#777",
   },
 });
 

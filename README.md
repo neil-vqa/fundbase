@@ -13,7 +13,7 @@ Are you a small club, organization, or just a group of friends looking for a way
 **Fundbase** is a simple bookkeeping app focused on helping small teams to manage and track the funds of their projects.
 
 <p align="center">
-  <img src="./fundbase_ss01.png">
+  <img src="./fundbase_ss01n.png">
 </p>
 
 <p align="center">

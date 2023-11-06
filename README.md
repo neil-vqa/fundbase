@@ -4,7 +4,7 @@
 
 # fundbase
 
-Smoothly manage the funds of your team's projects.
+Conveniently manage the funds of your team's projects.
 
 A React Native application.
 
